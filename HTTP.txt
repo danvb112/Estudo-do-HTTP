@@ -28,4 +28,19 @@ HTTP garante a conectividade. Isso quer dizer que o protocolo HTTP funciona em t
 ter problemas com firewalls e outras regras de segurança. Nós podemos nos conectar sem maiores problemas
 com qualquer servidor no mundo!
 
--
+- Quando usamos o HTTP, todos os dados enviados entre cliente e servidor são transmitidos em texto puro,
+inclusive dados sensíveis, como login e senha. Essas informações são enviadas em texto limpo e é possi-
+vel vizualiza-las pelas ferramentas do desenvolvedor do navegador. A aba network nos possibilita isso.
+
+- Quando o navegador pede informações, nessa comunicação existem vários intermediários. Por exemplo,
+usando uma conexão WI-FI, os dados do navegador passam primeiro para o roteador WI-FI, e do roteador
+passam para o modem do provedro, do modem para algum servidor do provedor, do modem para algum servidor
+do provedor de internet, como Oi ou NET.
+
+- O problema é, quando usamos HTTP, qualquer servidor no meio pode espionar dados enviados, algo total-
+mente inseguro! Para estes outros cenários, existe o HTTPSm que basicamente é o HTTP comum, porém com 
+uma camada adicional de segurança/criptografia que antes era SSL, mas posteriormente passou a ser tam-
+bém TLS. é muito comum que estas duas siglas sejam encontradas juntas como SSL/TLS por se tratarem da 
+mesma questão de segurança. Sendo assim, temos dois termos:
+1. HTTP: HyperText Transfer Protocol
+2. SSL/TLS: Secure Sockets Layer / Transport Layer Security
