@@ -91,4 +91,51 @@ representa o "top level domain", está na raiz do domínio. Depois vem o "com" abr
 do Gmail temos: "mail.google.com" ou ainda no caso do google drive, temos: "drive.google.com". Tanto o
 Gmail quanto o Drive são sub-dominios do domínio Google.
 
+- O nome do domíno pe organizado em uma hierarquia que foi criada para organizar os sites na internet
+e para a gente ter algo fácil para se lembrar. A internet funciona na verdade sem esses domínios. As 
+máquinas na internet tem outra forma de se endereçar. Elas usam o que se chama endereços de IP, que 
+nada mais são do que números, muito difícil para a gente decorar.
+
+- Mas a gente não acessa o Google por um número e sim pela URL. Acontece que por debaixo dos panos quan-
+do realizamos uma requisição essa URL é trasformada em um número por um serviço trasparente chamado de 
+DNS (Domain Name System). Esse serviço age como um grande banco de dados de domínios. Portanto quando
+fazemos uma requisição para "alura.com.br" o DNS age transformando para um IP e a requisição prossegue.
+
+- Agora imagine que o servidor é uma casa: dependendo da casa há varias portas disponíveis. O que é pre-
+ciso saber é qual porta devemos utilizar quando chegarmos na casa. Ou seja devemos saber qual porta é
+utilizada ppara o protocolo HTTP.
+
+- A porta reservada para o protocolo HTTP é o 80. Novamente um número, e como o navegador já sabe essa
+porta padrão, podemos omiti-la, mas nada nos impede de adiciona-la no endereço, por exemplo:
+http://www.alura.com.br:80
+
+- Se tentarmos colocar uma outra porta, 81 por exemplo, não funciona, pois essa porta não está aberta
+no servidor, não podemos estabelecer uma conexão e o tempo de conexão vai se esgotar. Igualmente o pro-
+tocolo HTTPS ´pssui uma porta padrão, a porta 443, que também podemos omitir ao acessarmos um endereço
+HTTPS.
+
+- Navegando dentro da Alura, mais informações aparecem depois do nome e do domínio. Por exemplo, para 
+acessar a página principal dos cursos, usamos https://cursos.alura.com.br/dashboard. O /dashboard é um 
+recurso (resource) do site que gostaríamos de acessar. Existem vários outros recursos na Alura como as 
+carreiras (/careers), ou o fórum de discussões (/forum). O importante é que cada recurso possua o seu 
+nome único.
+
+- Estamos usando regras bem definidas para descrever a localização de um recurso na web. Todos os ende-
+reços na web sempre seguem esse mesmo padrão: "protocolo://dominio:porta/caminho/recurso". Esse padrão
+na verdade segue uma especificação que foi batizada de Uniform Resource Locator, abreviada como URL.
+Então as URLs são os endereços na web.
+
+- Muitas vezes, desenvolvedores usam a sligla URI (Uniform Resourse Identifier) quando falam de endere-
+ços na web. Alguns preferem URL, e alguns misturam as duas siglas à vontadae. Há uma certa confusão no 
+mercado a respeito e mesmo desenvolvedores experientes não sabem explicar a diferença.
+
+- Uma URL é uma URI. No contexto do desenvolvimento web, ambas as siglas são válidas para falar de ende-
+reços na web. As siglas são praticamente sinônimos e são utilizadas dessa forma.
+
+- Uma URL é uma URI, mas nem todas as URIs são URLs que identificam um recurso sem definir o endereço,
+nem o protocolo. Em outras palavras uma URL representa a identificação de um recurso (URI) através do 
+endereço, mas nem todas as identificações são URLs.
+
 -
+
+
