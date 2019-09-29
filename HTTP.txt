@@ -44,3 +44,51 @@ bém TLS. é muito comum que estas duas siglas sejam encontradas juntas como SSL/T
 mesma questão de segurança. Sendo assim, temos dois termos:
 1. HTTP: HyperText Transfer Protocol
 2. SSL/TLS: Secure Sockets Layer / Transport Layer Security
+
+- O HTTPS para garantir a segurança usa criptograia baseada em chaves públicas e privadas e para gerar
+essas chaves publicas e privadas é preciso garantir a identidade de quem possui essas chaves e isso é
+feito a partir de um certificado digital, ou seja, um certificado digital é utilizado para identificar
+determinada entidade e ainda é utilizada para geração de criptografia.
+
+- Apesar disso, ainda é necessário que uma autoridade certificadora, que nada mais é do que um orgão ou
+entidade confiável, garanta não apenas a identidade do site mas também a validade do certificado.
+
+- OS navegadores em posse da chave pública criptografam as informações e as enviam para o servidor
+que as descriptografa com a chave privada. É importante notar que apenas a chave privada descriptografa
+as informações criptografadas com a pública, e também que deve-se manter a chave privada segura.
+
+- Como temos duas chaves envolvidas, esse método de criptografia é chamado de criptografia assimetrica
+e tem um problema, ela é lenta.
+
+- Por outro lado temos a criptografia simétrica, que usa a mesma chave para cifrar e decifrar os dados
+como na vida real, onde usamos a mesma chave para abrir e fechar a porta. A criptografia simétrica é 
+muito mais rápida, mas infelizmente não tão segura. como exite apenas uma chave, ela ficará espalhada 
+pelos clientes (navegadores) e qualquer um que tenha posse dessa chave, pode decifrar a comunicação.
+
+- O interessante é que o HTTPS usa ambos os métodos de criptografia, simétrica e assimétrica.
+
+- No certificado, vem a chave pública para o cliente utilizar e o servidor continua de posse da chave
+privada. Isso é seguro, mas lento por isso o cliente gera uma chave simétrica ao vivo. Uma chave só pra
+ele e o servidor com o qual está se comunicando naquele momento. Essa chave exclusiva (e simétrica) é
+então enviada para o servidor utilizando uma criptografia assimétrica (chave pública e privada) e então
+é usada para o restante da comunicação.
+
+- Então o HTTPS começa com criptografia assimétrica para depois mudar para criptografia simétrica. Essa 
+chave simétrica será gerada no inicio da comunicação e será reaproveitada nas requuisições seguintes.
+
+- Já sabemos que o endereço começa com http ou https. Repare que depois do nome do protocolo, vem ://
+seguido pelo nome do site. No vocabulário do desenvolvedor "www.alura.com.br" é o domínio (ou domain).
+A abreviação "www" representa "world wide web"
+
+- Olhando da direita para esquerda, o domínio que começa com "br", indicando um site do Brasil. O "br"
+representa o "top level domain", está na raiz do domínio. Depois vem o "com" abreviação de comercial e
+"alura". O "com" e o "alura" são sub-domínios. 
+
+- O "www" representa também um sub-domínio, no entanto o seu uso é opcional, tanto que "alura.com.br" e
+"www.alura.com.br" funcionam e mostram a mesma página.
+
+- Existe também a ideia de sub-domínios que representam sessões dentro de um site. Por exemplo no caso
+do Gmail temos: "mail.google.com" ou ainda no caso do google drive, temos: "drive.google.com". Tanto o
+Gmail quanto o Drive são sub-dominios do domínio Google.
+
+-
