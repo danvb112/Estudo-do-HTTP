@@ -136,6 +136,37 @@ reços na web. As siglas são praticamente sinônimos e são utilizadas dessa forma.
 nem o protocolo. Em outras palavras uma URL representa a identificação de um recurso (URI) através do 
 endereço, mas nem todas as identificações são URLs.
 
+- No mundo HTTP, a requisição enviada pelo navegadro para o servidor é chamada de HTTP REQUEST e a res-
+posta é chamada de HTTP RESPONSE. Aqui é importante saber que a comunicação sempre começa com o cliente
+ele é quem pede as informações. O servidor responde apenas o que foi requisitado e nunca inicia a comu-
+nicação.
+
+- A ideia do HTTP é a de que cada recurso pe independente do outro e não depende do anterior. Isso tam-
+bém se aplica para os dados enviados na requisição. Cada requisição pe independente da outra e ela sem-
+pre deve conter todas as informações para o servidor responder. Cada requisição precisa ter todas as 
+informações, a mesma coisa se aplica para a resposta, precisa ter todas as informações.
+
+- Essa caracteristica de cada requisição ser independente é chamada de stateless. O HTTP é um protocolo
+que não mantém o estado de requisições. Isso significa que só com http não há como se lembrar das requi-
+sições anteriores enviadas para o servidor.
+
+- Quando efetuamos o login e nossos dados são validados, o servidor tem certeza que o usuário existe e
+gera uma identificação quase aleatória para o usuário. Essa identificação é um número criado ao vivo e 
+muito dificil de advinhar. Esse número é a identificação temporária do usuário e ele será devolvido na
+resposta.
+
+- O navegador grava esse número em um arquivo especial para cada site, são os famosos cookies. Se apa-
+garmos esse cookie, perdemos a identificação, sendo assim, o site exigirá um novo login pois não saberá
+que já tinhamos logado. Normalmente o nome do cookie é algo como session-id, dependendo da plataforma de 
+desenvolvimento utilizada ele pode se chamar de PHPSESSID ou ASP.NET_SessionId ou JSESSIONID ou outro no
+me que foi inventado! O Cookie será gerado de forma transparente pela tecnologia que você for utilizar 
+para criar aplicativos web. 
+
+- Resumindo, todas as plataformas ajudam a gerar esse número e a criar o cookie de maneira trasparente.
+é dessa forma que as plataformas ferenciam SESSÕES com o usuário. A ideia de manter dados entre requi-
+sições é algo muito comum no desenvolvimento de aplicações na web. Um usuário que se loga no sistema web
+causa a criação de uma sessão. Uma sessão é útil ára guardar informações sobre o usuério e ações dele.
+
 -
 
 
