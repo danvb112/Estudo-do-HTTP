@@ -167,6 +167,43 @@ para criar aplicativos web.
 sições é algo muito comum no desenvolvimento de aplicações na web. Um usuário que se loga no sistema web
 causa a criação de uma sessão. Uma sessão é útil ára guardar informações sobre o usuério e ações dele.
 
--
+- Requisições com o método GET quer dizer que queremos receber informações sem modificar nada no servi-
+dor
+
+- O protocolo HTTP define alguns códigos padrões para esclarecer a resposta. O código 301 significa 
+Moved Permanently. Ou seja, o site ffoi movido para outro lugar, dentro do item response Headers podemos
+ver todos os cabeçalhos que o servidor devolveu e logo logo apareceu um com o nome Location. Esse cabe-
+çalho indica a nova URL, só que agora usando https.
+
+- Quando o navegador recebe o status 301 ele já sabe que é preciso enviar uma nova requisição e procura
+a URL no cabeçalho de resposta Location.
+
+- Se alguem acessa a Alura usando http (inseguro) automaticamente é chamado o site seguto (https). Isto
+é um comportamento muito comum para garantir que usamos https sempre. Se esquecermos de usar https, o
+servidor devolve o status 301 com a nova localização, mas agora usando https. O navegador ao receber
+301, chama automaticamente a nova URL. No mundo de desenvolvimento web este comportamento é chamado de
+Redirecionamento pelo navegador, ou Redireceionamento no lado do cliente. 
+
+- O código de status 200, um dos mais comuns, significa que tudo deu certo. Dessa vez não foi preciso
+fazer nenhum redirecionamento (não tem cabeçalho Location na resposta) e não deu nenhum outro problema.
+
+- O protocolo HTTP não está preso em algum formato especifico. Podemos trafegar qualquer informação com 
+ele, seja texto ou binário.
+
+- Se fizermos uma busca por uma página que não existe, o servidor vai retornar o status code 404, que
+significa que o servidor não encontrou o recurso (Not Found). 
+
+- Também podem acontecer problemas no lado do servidor, isso é normal pois alguma lógica pode falhar,
+erros acontecem no desenvolvimento. Quando algum problema no servidor acontecer, podemos avisar ao clien
+te através do protocolo HTTP. O código mais comum para esse tipo de problema é o 500 qye significa:
+"deu pau no servidor".
+
+- O importante é saber que algo que começa com 2xx significa coisa boa, a requisição foi executada com 
+sucesso. Quando recebemos algo com 3xx normalmente significa que o navegador precisa fazer algo a mais
+(o cliente precisa agir) pois algo mudou ou um recurso não existe mais. 4xx significa que o navegador
+enviou dados errados, como por exemplo uma URL errada. Caso o servidor gere algum problema, serão uti-
+lizados os códigos 5xx. No dia a dia os códigos 200, 404 e 500 são de longe os mais utilizados!
+
+-  
 
 
