@@ -204,6 +204,41 @@ sucesso. Quando recebemos algo com 3xx normalmente significa que o navegador pre
 enviou dados errados, como por exemplo uma URL errada. Caso o servidor gere algum problema, serão uti-
 lizados os códigos 5xx. No dia a dia os códigos 200, 404 e 500 são de longe os mais utilizados!
 
--  
+-  Ao fazer uma busca no YouTube, como tem muito conteúdo, vamos persquisar por Ayrton Senna. Repare
+que, ao pesquisar no YouTube, a URL mudou um pouco. O recurso acessado pela busca se chama "/results"
+(os resultadso da pesquisa) mas agora temos um parâmetro da requisição, indicado pela "?":
+https://www.youtube.com/results?search_query=Ayrton+Senna
+
+- O Parâmetro se chama search_query com o valor "Ayrton-Senna". Esses parâmetros da URL normalmente são
+chamados de Query Params. O HTTP permite enviar mais de um parâmetro, basta concatenar o proximo parâ-
+metro através do caractere "&"
+
+- Uma caracteristica da requisição GET é enviar os parâmetros pela URL, isso é útil quando queremos dei-
+xar os parâmetros visíveis. Assim podemos facilmente guardar a URL com os parâmetros para repetir a 
+requisição algum momento depois. Mas não é uma boa opção quando queremos enviar credenciais como login e
+senha pois eles apareceriam na URL também.
+
+- Ao enviar o login e senha para a alura por exemplo, a url se chama https://www.alura.com.br/signin.
+O método HTTP utilizado mudou, Estamos usando o HTTP POST. Usando o POST, o navegador envia os dados do 
+formulário no corpo da requisição e não na URL, se fosse um GET, todos os dados seriam enviados através 
+dar URL.
+
+- O método POST foi inicialmente pensado para criar algo novo no servidor como criar uma pergunta num
+forum por exemplo. Ou seja, ao enviar uma requisição POST para o servidor, a nossa intenção é criar algo
+novo. No entanto, nem sempre isso é realmente utilizado dessa maneira. Por exemplo, acabamos de usar um
+POST para verificar o login, ou seja, não alteramos ou adicionamos nada. Nossa motivação para o POST era
+esconder os parâmetros apenas.
+
+- Como o servidor realmente reage quando recebe uma requisição POST depende da implementação, depende da
+lógica atrás. Os métodos como GET e POST definem uma intenção mas o que realmente será executado depende
+do servidor.
+
+- No dia a dia, vocês vão ver códigos usando GET para fazer pesquisas mas também para alterar ou remover
+algo no servidor. A mesma coisa podemos dizer sobre POST. Vocês vão usar o POST para inserir e alterar 
+dados, mas também para pesquisar. As aplicações podem adaptar o significado dos métodos HTTP quando for
+necessário.
+
+-
+
 
 
