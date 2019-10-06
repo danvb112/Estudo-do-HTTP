@@ -238,7 +238,82 @@ algo no servidor. A mesma coisa podemos dizer sobre POST. Vocês vão usar o POST 
 dados, mas também para pesquisar. As aplicações podem adaptar o significado dos métodos HTTP quando for
 necessário.
 
--
+- Os métodos GET e POST são de longe os métodos mais utilizados no desenvolvimento web, mas porque isso?
+A resposta está no nosso HTML, para enviar uma requisição HTTP sem o uso do JavaScript é preciso escre-
+ver um código HTML. Em detalhe para enviar uma requisição HTTP devemos usar a tag a ou um from e para
+POST devemos sempre usar a tag a. E aí está o problema pois não tem uma forma que permite enviar requi-
+sição HTTP pelo HTML a não ser GET e POST. Para usar outros métodos como DELTE ou PUT é preciso progra-
+mar em JavaScript e nem sempre isso é desejável.
 
+- O cabeçalho Content-Type, como o próprio nome sugere, traz informações sobre o tipo de conteúdo que 
+está sendo trafegado. Logo se formos enviar através do HTTP um conteúdo JSON podemos especificar isso 
+através dele. Ele, portanto, não tem relação com o formato esperado na resposta.
+
+- Accept-Language é um cabeçalho que podemos usar para definir a linguagem usada. Usa-se o seguinte 
+formato:
+Accept-Language: <linguagem-localização(opcional)>
+Como em:
+Accept-Language: en, Accept-Language: en-US(inglês americano) e 
+Accept-Language: pt-BR(português brasileiro)
+
+- Pelo cabeçalho Accept podemos usar algum formato especifico como:
+Accept: text/html, Accept: text/css, Accept: application/xml, Accept: application/json, 
+Accept:image/jpeg e Accept: image/*
+
+- Logo podemos perceber que o padrão usado pela equipe do websevice define que uma requisição web tem 3
+tipos de componentes importantes: recursos (URI), operações (GET, POST, PUT, DELETE/...) e representa-
+ção de dados (XML, JSON, ...).
+
+- Esses três componentes em conjuntos seguindo algumas praticas são a base para o modelo arquitetural
+REST(representational State Transfer) ou em português Transferência de Estado Representacional.
+--------------------------------------------------------------------------------------------------------
+--- Recursos --- 
+
+- Ao criar ass URIs do nosso sistema devemos levar em conta que elas representam recursos, não ações. Em
+Sistemas REST, nossas URIs devem conter apenas substantivos, que são nossos recursos:
+"/restaurante/adiciona" não é uma boa URI, pois contém um verbo e não está indentificando um recurso, 
+mas sim uma operação. Para representar a adição de um restaurante podemos usar a URI /restaurante com um
+método HTTP POST, que representa que estamos adicionando alguma informação no sistema.
+
+--- Operações ---
+
+- Cada método tem uma semântica diferente e juntando o método à URI deveriamos conseguir representar to-
+das as ações do nosso sistema. As semânticas principais são:
+GET - recupera informações sobre o recurso identificado pela URI. Ex: listar restaurante, visualizar o 
+restaurante 1. Uma requisição GET não deve modificar nenhum recurso do seu sistema, ou seja, não deve 
+ter nenhum efeito colateral, você apenas recupera informações do sistema.
+
+POST - adiciona informações usando o recurso da URI passada. Ex: adicionar um restaurante. Pode adicio-
+nar informações a um recurso ou criar um novo recurso.
+
+PUT - adiciona (ou modifica) um recurso na URI passada. Ex: atualizar um restaurante.
+
+DELETE - remove o recurso representado pela URI passada. Ex: remover um restaurante.
+
+--- Representações ---
+
+- Quando fazemos uma aplicação não trafegamos um recurso pela rede, apenas uma representação dele.
+E essa representação pode ser feita de diferentes formas como JSON, XML ou HTML.
+
+--- Conclusão ---
+
+- Nossas URIs devem representar recursos, as operações no recurso devem ser indicadas pelos métodos HTTP
+e podemos falar qual é o formato em que conversamos com o servidor com o Content-Type e Accept que são
+cabeçalhos do HTTP.
+--------------------------------------------------------------------------------------------------------
+
+
+- Em alguns cabeçalhos do HTTP devemos especificar algum formato. Os formatos são chamados na documenta-
+ção de MIMEtypes. E na definição do cabeçalho usamos a seguinte estrutura: tipo/subtipo. os tipos conhe-
+cidos são:
+text, image, application, audio e video
+e alguns subtipos:
+text -> text/plain, text/html, text/css, text/javascript
+image -> image/gif, image/png, image/jpeg
+audio -> audio/midi, audio/mpeg, audio/webm, audio/ogg, audio/wav
+video -> video/mp4
+application -> application/xml,  application/pdf
+
+- 
 
 
