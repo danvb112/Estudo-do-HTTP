@@ -314,6 +314,133 @@ audio -> audio/midi, audio/mpeg, audio/webm, audio/ogg, audio/wav
 video -> video/mp4
 application -> application/xml,  application/pdf
 
-- 
+- Até agora sempre usamos o browser para realizar uma requisição. Mas podemos realizar fora dele usando
+a linha de comando. Um programa famoso pra isso é o CURL que já vem instalado por padrão no Linux e no 
+MacOS. Para realizar e depurar uma requisição via CURL podemos simplismente executar no terminal o se-
+guinte comando: "curl -v www.caelum.com.br"
+
+- Uma saida típica seria:
+
+Fabios-MacBook-Pro:~ fabiopimentel$ curl -v www.caelum.com.br 
+* Rebuilt URL to: www.caelum.com.br/
+*   Trying 172.217.29.51...
+* Connected to www.caelum.com.br (172.217.29.51) port 80 (#0)
+> GET / HTTP/1.1
+> Host: www.caelum.com.br
+> User-Agent: curl/7.49.1
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Content-Type: text/html; charset=utf-8
+< Vary: Accept-Encoding,User-Agent
+< Content-Language: pt-br
+< Content-Type: text/html;charset=UTF-8
+< X-DNS-Prefetch-Control: on
+< X-Cloud-Trace-Context: 3e5e270ee3ab1e79f81b10d2cdef53cd
+< Date: Fri, 24 Mar 2017 19:20:12 GMT
+< Server: Google Frontend
+< Content-Length: 95776
+< 
+       <!DOCTYPE html>
+    <html class="no-js"lang="pt-br"> <head> <title>Caelum | Cursos de Java, .NET, Android, PHP, Scrum, HTML, CSS e JavaScript </title>
+    …
+
+- Pode-se notar pela saída que temos logo no começo as informações do request efetuado:
+
+> GET / HTTP/1.1
+> Host: www.caelum.com.br
+> User-Agent: curl/7.49.1
+> Accept: */*
+
+- E após essas infos temos o cabeçalho da resposta obtida pelo servidor:
+
+< HTTP/1.1 200 OK
+< Content-Type: text/html; charset=utf-8
+< Vary: Accept-Encoding,User-Agent
+< Content-Language: pt-br
+< Content-Type: text/html;charset=UTF-8
+< X-DNS-Prefetch-Control: on
+< X-Cloud-Trace-Context: 3e5e270ee3ab1e79f81b10d2cdef53cd
+< Date: Fri, 24 Mar 2017 19:20:12 GMT
+< Server: Google Frontend
+< Content-Length: 95776
+
+- Logo depois vem o corpo da resposta (HTML da página requisitada)
+
+- O protocolo que estamos trabalhando até agora foi especificado na década de 90 e de lá até hoje muitas
+alterações foram feitas na forma como usamos a internet.
+
+- Com a chegada do mobile novas preocupações apareceram e otimizações são cada vez mais necessárias para
+uma boa performace. Por isso uma mudança foi necessária e em 2015 depois de alguns anos de especifica-
+ções e reuniões, surgiu a versão 2 desse protocolo chamada de HTTP/2
+
+- A nova versão do protocolo HTTP traz mudanças fundamentais para a Web. Recursos fantásticos que vão 
+melhorar muito a performace da Web além de simplificar a vida dos desenvolvedores.
+
+- No HTTP 1.1, para melhorar a performace, habilitávamos o GZIP no servidor para comprimir os dados das
+respostas. É uma excelente pratica, mas que precisa ser habilitada explicitamente. No HTTP/2, o GZIP é
+padrão e obrigatório.
+
+- Mas, ser você já olhou como funciona uma requisição HTTP, vai notar que só o GZIPpar as respostas re-
+solve só metade do problema. Tanto o request quanto o response levam vários cabeçalhos (headers) que não
+são comprimidos no HTTP 1.1 e ainda viajam em texto puro.
+
+- Já na nova versão, os headers passam a ser binários e alem disso, são comprimidos usando um algoritmo
+chamado HPACK. Isso diminui bastante o volume de dados trafegados nos headers.
+
+- Além de todas essas otmizações para melhorar a performace ainda hoube uma preocupação com a segurança
+exigindo TLS por padrão também.
+
+- A partir od HTTP/2, não precisamos repetir os headers, os cabeçalhos que neviamos na requisição ante-
+rior. Logo, quando fazemos uma requisição onde teríamos os cabeçalhos exatamente iguais aos da requisi-
+ção passada, nós não precisamos enviar novamente esses dados.
+
+- Agora, se temos uma imagem, os cabeçalhos podem mudar, por exemplo, o Host, que pode estar especifica-
+do na página principal. Logo na primeira requisição, o conteúdo HTML es´pecificou que tem que buscar uma
+imagem no Host, que é "image.caelum.com.br", um subdomínio dentro da nossa aplicação. Então esse cabe-
+çalho terá que ser alterado, logo enviaremos apenas os cabeçalhos que são difirentes. Isso está especi-
+ficado no HTTP2, para que uma requisição fique mais leve e não onere tanto o nosso usuário. Isso é co-
+nhecido como Headers Stateful.
+
+- No inicio do curso, comentamos que o HTTP era stateless, ou seja, ele não guarda informações passadas.
+E isso continua valendo, mas no caso dos cabeçalhos, esxite um ambiente que guarda estado.
+
+- No HTTP2 houve uma mudança em como as requisições entre cliente e servidor funcionam. Agora temos uma
+conversa masi paralela. Anteriormente estávamos trabalhando com conceitos de requisições seriais, fazía-
+mos uma requisição e esperávamos receber e por aí vai. No HTTP2, quando o cliente realiza uma requisição
+para *index.html, o servidor devolve a página, mas ele já pode passar para o browser as informações ne-
+cessárias para que essa página possa ser, de fato, exibida. Ou seja, ele consegue dar um passo além.
+
+- Isso é outra abordagem que surgiou no HTTP2, muito mais interessante. Mas quando o browser for inter-
+pretar essa página HTML, vair ter que passar pelo conteúdo que especifica o arquivo CSS? Sim, mas quando
+ele passar pelo estilo.css, vai verificar que já recebeu. Ou seja, ele percebe que já recebeu essas in-
+formações. Esse é o conceito de Server Push, ou seja, o server envia dados para o cliente sem que o 
+cliente tenha solicitado, tornando o tráfego de dados muito mais otmizado.
+
+- No modelo request e response, antes da requisição ser feita, há uma conexão, comunicação entre o clien
+te e o servidor, que chamamos de TCP. Para que consegamos realizar uma requisição via HTTP, antes existe
+o modelo de TCP, que é um protocolo de trasporte. Isso é mais a nível de infraestrutura. Cada requisição
+deveria abrir uma conexão TCP, executar e fechar. Mas isso seria muito ruim pois a conexão TCP é um re-
+curso muito caro e demora a ser alocado.
+
+- Então o que acontece, no HTTP1 exite um mecanismo chamado de "Keep-Alive" que determina quanto tempo,
+por exemplo, a nossa conexão pode ficar ativa. Ou seja, não encerra essa conexão TCP. Portanto consegui-
+mos realizer várias requisições com a mesma conexão TCP. Hoje a maioria dos browsers tem um número entre
+4 a 8 conexões simultâneas por domínio.
+
+- O "Keep-Alive" continua existindo no HTTP2, só que ele trouxe uma novidade. Por exemplo, se temos uma
+conexão TCP aberta e realizarmos uma requisição, poderíamos já dar prosseguimento às próximas requisi-
+ções, isso em paralelo, sem de fato ficar esperando o resultado dela, de maniera assíncrona, e vamos re-
+cebendo essas respostas à medida em que o servidor for conseguindo processar.
+
+- Então, essas requisições e respostas vão chegando a todo tempo. É totalmente paralelo. A mesma coisa 
+acontece com o servidor, não precisamos esperar uma resposta para enviar outra. Se já está pronta para 
+ser enviada, ele já envia diretamente.
+
+- Esse conceito que surgiu no HTTP2 é chamado de Multiplexing e traz uma performance bastante relevante
+para o nosso HTTP.
+
+
+ 
 
 
